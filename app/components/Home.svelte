@@ -1,5 +1,5 @@
 <page>
-    <actionBar title="My Tasks" />
+    <actionBar title="My To do list" />
 
     <tabView>
             <tabViewItem title="To Do">
