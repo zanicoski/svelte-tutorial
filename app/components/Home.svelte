@@ -37,6 +37,27 @@
             todos = [{ name: textFieldValue }, ...todos]
             textFieldValue = "";
     }
+
+    async function onDoneTap(args) {
+	let result = await action("What do you want to do with this task?", "Cancel", [
+			"Mark To Do",
+			"Delete forever"
+	]);
+
+	console.log(result); // Logs the selected option for debugging.
+	let item = dones[args.index]
+	switch (result) {
+			case "Mark To Do":
+					todos = addToList(todos, item) // Places the tapped active task at the top of the completed tasks.
+					dones = removeFromList(dones, item) // Removes the tapped active task.
+					break;
+			case "Delete forever":
+					dones = removeFromList(dones, item) // Removes the tapped active task.
+					break;
+			case "Cancel" || undefined: // Dismisses the dialog
+					break;
+	}
+}
 </script>
 <page>
     <actionBar title="My To do list" />
@@ -56,12 +77,11 @@
                     </gridLayout>
             </tabViewItem>
             <tabViewItem title="Completed">
-                <listView items="{dones}">
+                <listView items="{dones}" on:itemTap="{onDoneTap}">
                     <Template let:item>
-                        <label text="{item.name}" textWrap="true" />
+                            <label text="{item.name}" textWrap="true" />
                     </Template>
-                
-                </listView>
+            </listView>
             </tabViewItem>
     </tabView>
 </page>
