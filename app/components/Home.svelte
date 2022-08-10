@@ -1,37 +1,5 @@
 <script>
     import {Template} from 'svelte-native/components'
-<<<<<<< HEAD
-   
-    let todos = []
-    
-    let dones = [] //completed items go here
-		const removeFromList = (list, item) => list.filter(t => t !== item);
-		const addToList = (list, item) => [item, ...list]
-
-    let textFieldValue = ""
-    const { default: App } = require("~/App.svelte");
-
-    async function onItemTap(args) {
-		let result = await action("What do you want to do with this task?", "Cancel", [
-				"Mark completed",
-				"Delete forever"
-		]);
-
-		console.log(result); // Logs the selected option for debugging.
-		let item = todos[args.index]
-		switch (result) {
-				case "Mark completed":
-						dones = addToList(dones, item) // Places the tapped active task at the top of the completed tasks.
-						todos = removeFromList(todos, item) // Removes the tapped active task.
-						break;
-				case "Delete forever":
-						todos = removeFromList(todos, item) // Removes the tapped active task.
-						break;
-				case "Cancel" || undefined: // Dismisses the dialog
-						break;
-		}
-	}
-=======
     let todos = []
     let textFieldValue = ""
     const { default: App }=require("~/App.svelte");
@@ -39,7 +7,6 @@
     function onItemTap(args) {
         console.log(`Item ${todos[args.index].name} at index: ${args.index} was tapped`);
     }
->>>>>>> 05d37575740f0962b4398b0dc427b900e17890e8
 
     function onButtonTap() {
         if (textFieldValue === "") return;
@@ -47,30 +14,6 @@
             todos = [{ name: textFieldValue }, ...todos]
             textFieldValue = "";
     }
-<<<<<<< HEAD
-
-    async function onDoneTap(args) {
-	let result = await action("What do you want to do with this task?", "Cancel", [
-			"Mark To Do",
-			"Delete forever"
-	]);
-
-	console.log(result); // Logs the selected option for debugging.
-	let item = dones[args.index]
-	switch (result) {
-			case "Mark To Do":
-					todos = addToList(todos, item) // Places the tapped active task at the top of the completed tasks.
-					dones = removeFromList(dones, item) // Removes the tapped active task.
-					break;
-			case "Delete forever":
-					dones = removeFromList(dones, item) // Removes the tapped active task.
-					break;
-			case "Cancel" || undefined: // Dismisses the dialog
-					break;
-	}
-}
-=======
->>>>>>> 05d37575740f0962b4398b0dc427b900e17890e8
 </script>
 <page>
     <actionBar title="My To do list" />
