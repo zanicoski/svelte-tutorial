@@ -1,5 +1,6 @@
 <script>
     import {Template} from 'svelte-native/components'
+<<<<<<< HEAD
    
     let todos = []
     
@@ -30,6 +31,15 @@
 						break;
 		}
 	}
+=======
+    let todos = []
+    let textFieldValue = ""
+    const { default: App }=require("~/App.svelte");
+
+    function onItemTap(args) {
+        console.log(`Item ${todos[args.index].name} at index: ${args.index} was tapped`);
+    }
+>>>>>>> 05d37575740f0962b4398b0dc427b900e17890e8
 
     function onButtonTap() {
         if (textFieldValue === "") return;
@@ -37,6 +47,7 @@
             todos = [{ name: textFieldValue }, ...todos]
             textFieldValue = "";
     }
+<<<<<<< HEAD
 
     async function onDoneTap(args) {
 	let result = await action("What do you want to do with this task?", "Cancel", [
@@ -58,6 +69,8 @@
 					break;
 	}
 }
+=======
+>>>>>>> 05d37575740f0962b4398b0dc427b900e17890e8
 </script>
 <page>
     <actionBar title="My To do list" />
