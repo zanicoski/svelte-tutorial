@@ -63,7 +63,7 @@
             <tabViewItem title="To Do">
                     <gridLayout columns="*,120" rows="70,*">
                         <textField col="0" row="0" bind:text="{textFieldValue}" hint="Type new task..." editable="true" on:returnPress="{onButtonTap}" />
-                        <button col="1" row="0" text="Add task" on:tap="{onButtonTap}" />
+                        <button col="1" row="0" text="Add task" on:tap="{onButtonTap}" class="-primary" />
 
                         <listView items="{todos}" on:itemTap="{onItemTap}" row="1" colSpan="2">
                             <Template let:item>
@@ -76,9 +76,23 @@
             <tabViewItem title="Completed">
                 <listView items="{dones}" on:itemTap="{onDoneTap}">
                     <Template let:item>
-                            <label text="{item.name}" textWrap="true" />
+                            <label text="{item.name}" textWrap="true" class="todo-item-completed"/>
                     </Template>
                 </listView>
             </tabViewItem>
     </tabView>
 </page>
+<style>
+	textField {
+			font-size: 20;
+	}
+
+    label {
+				font-size: 18;
+}
+
+.todo-item-completed {
+	color: #939393;
+	text-decoration: line-through;
+}
+</style>
