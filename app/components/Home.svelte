@@ -1,12 +1,35 @@
 <script>
     import {Template} from 'svelte-native/components'
+   
     let todos = []
-    let textFieldValue = ""
-    const { default: App }=require("~/App.svelte");
+    
+    let dones = [] //completed items go here
+		const removeFromList = (list, item) => list.filter(t => t !== item);
+		const addToList = (list, item) => [item, ...list]
 
-    function onItemTap(args) {
-        console.log(`Item ${todos[args.index].name} at index: ${args.index} was tapped`);
-    }
+    let textFieldValue = ""
+    const { default: App } = require("~/App.svelte");
+
+    async function onItemTap(args) {
+		let result = await action("What do you want to do with this task?", "Cancel", [
+				"Mark completed",
+				"Delete forever"
+		]);
+
+		console.log(result); // Logs the selected option for debugging.
+		let item = todos[args.index]
+		switch (result) {
+				case "Mark completed":
+						dones = addToList(dones, item) // Places the tapped active task at the top of the completed tasks.
+						todos = removeFromList(todos, item) // Removes the tapped active task.
+						break;
+				case "Delete forever":
+						todos = removeFromList(todos, item) // Removes the tapped active task.
+						break;
+				case "Cancel" || undefined: // Dismisses the dialog
+						break;
+		}
+	}
 
     function onButtonTap() {
         if (textFieldValue === "") return;
