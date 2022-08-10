@@ -37,6 +37,24 @@
             todos = [{ name: textFieldValue }, ...todos]
             textFieldValue = "";
     }
+
+    async function onDoneTap(args) {
+        let result = await action ("What do you want to do with this task?", "Cancel", "Mark To do", 
+        "Delete Forever");
+
+        let item = dones[args.index]
+        switch (result) {
+            case "Mark To Do":
+                todos = addToList(todos, item)
+                dones = removeFromList (dones, item)
+                break;
+            case "Delete Forever":
+                dones = removeFromList (dones, item)
+                break;
+            case "Cancel" || undefined:
+                break;
+        }
+    }
 </script>
 <page>
     <actionBar title="My To do list" />
@@ -60,7 +78,7 @@
                     <Template let:item>
                             <label text="{item.name}" textWrap="true" />
                     </Template>
-            </listView>
+                </listView>
             </tabViewItem>
     </tabView>
 </page>
