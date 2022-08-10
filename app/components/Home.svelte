@@ -39,16 +39,16 @@
     }
 
     async function onDoneTap(args) {
-        let result = await action ("What do you want to do with this task?", "Cancel", "Mark To do", 
-        "Delete Forever");
+        let result = await action ("What do you want to do with this task?", "Cancel", ["Mark To do", 
+        "Delete forever"]);
 
         let item = dones[args.index]
         switch (result) {
-            case "Mark To Do":
+            case "Mark To do":
                 todos = addToList(todos, item)
                 dones = removeFromList (dones, item)
                 break;
-            case "Delete Forever":
+            case "Delete forever":
                 dones = removeFromList (dones, item)
                 break;
             case "Cancel" || undefined:
