@@ -33,7 +33,11 @@
                     </gridLayout>
             </tabViewItem>
             <tabViewItem title="Completed">
-                    <label textWrap="true">This tab will list completed tasks for tracking.</label>
+                <listView items="{dones}" on:itemTap="{onDoneTap}">
+                    <Template let:item>
+                            <label text="{item.name}" textWrap="true" />
+                    </Template>
+            </listView>
             </tabViewItem>
     </tabView>
 </page>
